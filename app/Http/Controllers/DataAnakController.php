@@ -13,16 +13,15 @@ class DataAnakController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
-    {
-        $data_anak = DB::table('anak')
-            ->select('anak.*', 'posyandu.umur_anak', 'orang_tua.nama_ibu')
-            ->join('posyandu', 'anak.nik_anak', '=', 'posyandu.nik_anak')
-            ->join('orang_tua', 'anak.nik_ibu', '=', 'orang_tua.nik_ibu')
-            ->orderBy('posyandu.umur_anak', 'DESC')
-            ->limit(1)
-            ->get();
-        return view('data-anak.index', compact('data_anak'));
+    public function index() {
+    $data_anak = DB::table('anak')
+                ->select('anak.*', 'posyandu.umur_anak', 'orang_tua.nama_ibu') 
+                ->join('posyandu', 'anak.nik_anak', '=', 'posyandu.nik_anak') 
+                ->join('orang_tua', 'anak.nik_ibu', '=', 'orang_tua.nik_ibu')
+                ->orderBy('posyandu.umur_anak', 'DESC') 
+                ->limit(1)
+                ->get(); 
+    return view('data-anak.index', compact('data_anak'));
     }
 
     public function create()
@@ -38,10 +37,9 @@ class DataAnakController extends Controller
     }
     public function edit($nik_anak)
     {
-        $data_anak = DataAnak::find($nik_anak);
-        return view('data-anak.edit', compact('data_anak'));
+    $data_anak = DataAnak::find($nik_anak);
+    return view('data-anak.edit', compact('data_anak'));
     }
-
     public function update(Request $request, $nik_anak)
     {
         $data_anak = DataAnak::findOrFail($nik_anak);
